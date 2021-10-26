@@ -11,34 +11,31 @@
     <h1>Data Selfie App</h1>
     <script>
     
-    getData();
-    async function getData() {
+        getData();
+        async function getData() {
 
+            const response = await fetch('/api')
+            const data = await response.json();
 
+            for (item of data) {
 
-        const response = await fetch('/api')
-        const data = await response.json();
+                const root = document.createElement('div');
+                const mood = document.createElement('div');
+                const geo = document.createElement('div');
+                const date = document.createElement('div');
 
-        for (item of data) {
+                mood.textContent = `mood: ${item.mood}`;
+                geo.textContent = `${item.lat}°, ${item.lon}°`;
+                const dateString = new Date(item.timestamp).toLocaleString();
+                date.textContent = dateString;
+                
+                root.append(mood, geo, date);
+                document.body.append(root);
 
-            const root = document.createElement('div');
-            const mood = document.createElement('div');
-            const geo = document.createElement('div');
-            const date = document.createElement('div');
-
-            mood.textContent = `mood: ${item.mood}`;
-            geo.textContent = `${item.lat}°, ${item.lon}°`;
-            const dateString = new Date(item.timestamp).toLocaleString();
-            date.textContent = dateString;
-            root.append(mood, geo, date);
-            document.body.append(root);
-
-        } 
-
-    console.log(data);
-
-    }
+            } 
+            console.log(data);
+        }
         
-</script>
-</body>
+        </script>
+    </body>
 </html>

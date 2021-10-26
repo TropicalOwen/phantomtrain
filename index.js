@@ -10,7 +10,10 @@ app.use(express.static('public'));
 
 app.use(express.json({limit: '1mb'}))
 
+//const database is set to the database file. 
 const database = new Datastore('database.db');
+
+//database from previous memory is loaded.
 database.loadDatabase();
 
 app.get('/api',(request, response) => {
@@ -34,13 +37,11 @@ app.post('/api', (request, response) => {
     console.log('I got a request!');
     console.log(request.body);
     const data = request.body;
-    response.json({
-
-    status: 'success',
-    timestamp: timestamp,
-    latitude: data.latitude,
-    longitude: data.longitude
-
-    });
+    const timestamp = Date.now();
+    data.timestamp = timestamp
+    //Inserts data into the database.
+    database.insert(data);
+    console.log(database)
+    response.json(data);
 
 });

@@ -9,6 +9,18 @@
 </head>
 <body>
     <script>
+
+    function retriveer() {
+
+        if (!document.querySelector('#textbox').value == " ") { 
+
+            console.log(document.querySelector('#textbox').value)
+            document.querySelector('#textbox').value = ""
+
+        } 
+        
+    }
+
     
     if ('geolocation' in navigator) {
 
@@ -46,11 +58,17 @@
     }
         
     </script>
+
     <h1>Data Selfie App</h1>
 
     <p>latitude: <span id= "latitude"></span>&deg;<br />
         longitude: <span id= "longitude">&deg;</span>
     </p>
- 
+
+    <input type="text" id="textbox" class="form-controlled">
+    <br>
+    <br>
+    <button onclick="retriveer() " class="button2 " id="buttonid2">start </button>
+
 </body>
 </html>
